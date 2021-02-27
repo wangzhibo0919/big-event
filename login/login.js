@@ -73,4 +73,33 @@ $('#register form').on('submit',function(e){
           }
       }
   })
+});
+//登录功能
+$('#login form').on('submit',function(e){
+    e.preventDefault();//阻止冒泡
+    // 1.收集数据  JQ  layui.form模块
+    let data = $(this).serialize();
+    //提交数据
+    $.ajax({
+        url: "http://ajax.frontend.itheima.net/api/login",
+        type:'post',
+        data:data,
+        success:function(res){
+      // res.token值设计思路，
+      //   1.比如zs登录；转跳主页index.html
+      //   2.network请求：url; 复制下 为我所用！
+      //   3.要求：主页上所有url请求，必须在请求头携带上token值（当前用户凭证）！确保就是当前用户在使用接口！
+
+      // 代码：
+      //   1. 拿到token:res.token;(应该怎么处理，一会其他地方就可以用？存本地！)
+      //   2. 一会转跳index.html  所有请求要用到token;
+      //弹窗
+      layer.msg(res.message);
+      //判断是否成功 成功则跳转到index页面并把token储存到本地 res.token临时身份证里的信息
+      if(res.status == 0){
+          location.href = '../index.html';
+          localStorage.setItem('token',res.token)
+      }
+    }
+  })
 })
