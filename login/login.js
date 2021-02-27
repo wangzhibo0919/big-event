@@ -1,0 +1,11 @@
+//切换功能
+//去注册
+$('#goto-register').on('click',function(){
+    $('#login').hide();//隐藏
+    $('#register').show()//显示
+})
+//去登陆
+$('#goto-login').on('click',function(){
+    $('#login').show()
+    $('#register').hide()
+})
